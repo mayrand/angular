@@ -28,4 +28,23 @@ export class ProductListComponent {
   Product whenever a new Product is selected
   */
   @Output() ProductSelected: EventEmitter<Product>;
+
+  /**
+ * currentProduct - local state containing
+ *
+ the currently selected `Product`
+ */
+  private currentProduct: Product;
+
+  clicked(product: Product): void {
+    this.currentProduct = product;
+    this.ProductSelected.emit(product);
+  }
+
+  isSelected(product: Product): boolean {
+    if (!product || !this.currentProduct) {
+      return false;
+    }
+    return product.sku === this.currentProduct.sku;
+  }
 }
