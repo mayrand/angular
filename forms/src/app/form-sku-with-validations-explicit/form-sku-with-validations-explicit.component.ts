@@ -16,6 +16,7 @@ function skuValidator(control: FormControl): { [s: string]: boolean } {
 export class FormSkuWithValidationsExplicitComponent implements OnInit {
   myForm: FormGroup;
   sku: AbstractControl;
+  productName: string;
 
   constructor(fb: FormBuilder) {
     this.myForm = fb.group({
