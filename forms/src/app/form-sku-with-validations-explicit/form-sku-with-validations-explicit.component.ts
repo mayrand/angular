@@ -3,7 +3,7 @@ import { FormGroup, AbstractControl, FormBuilder, Validators, FormControl } from
 
 function skuValidator(control: FormControl): { [s: string]: boolean } {
   if (!control.value.match(/^123/)) {
-    return {invalidSku: true};
+    return { invalidSku: true };
   }
 }
 
@@ -19,9 +19,21 @@ export class FormSkuWithValidationsExplicitComponent implements OnInit {
 
   constructor(fb: FormBuilder) {
     this.myForm = fb.group({
-      'sku': ['', Validators.compose([Validators.required,skuValidator])]
+      'sku': ['', Validators.compose([Validators.required, skuValidator])]
     });
     this.sku = this.myForm.controls['sku'];
+
+    this.sku.valueChanges.subscribe(
+      (value: string) => {
+        console.log('sku changed to:', value);
+      }
+    );
+
+    this.myForm.valueChanges.subscribe(
+      (form: any) => {
+        console.log('form changed to:', form);
+      }
+    );
   }
 
   ngOnInit() {
